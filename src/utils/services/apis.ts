@@ -4,15 +4,16 @@ import { BASE_URL, ENDPOINTS } from 'utils/helpers/constants';
 
 export const apisauces = create({
   baseURL: BASE_URL,
-  headers: {
-    ...DEFAULT_HEADERS,
-  },
+  headers: DEFAULT_HEADERS,
   timeout: 3000,
 });
 
 type NetworkPromiseResponse<T> = Promise<T>;
 
 function login<T>(data: LoginParams): NetworkPromiseResponse<T> {
+
+  // apisauces.setHeader("User-Agent", "iosss")
+  console.log('login apis...')
   return new Promise((resolve, reject) => {
     apisauces.post(ENDPOINTS.LOG_IN, data)
       .then((res) => {
@@ -37,19 +38,19 @@ function login<T>(data: LoginParams): NetworkPromiseResponse<T> {
   })
 }
 
-function getMarketSummaries<T>(): NetworkPromiseResponse<T> {
+function getMarketHeader<T>(): NetworkPromiseResponse<T> {
   return new Promise((resolve, reject) => {
-    apisauces.get(ENDPOINTS.GET_MARKET_SUMMARIES)
+    apisauces.get(ENDPOINTS.GET_MARKET_HEADERS)
       .then((res) => {
-        console.log('getMarketSummaries api res: ', JSON.stringify(res))
+        // console.log('getMarketHeader api res: ', JSON.stringify(res))
         if (res.ok) {
           return resolve(res.data as any)
         }
-        console.log('getMarketSummaries api not OK')
+        console.log('getMarketHeader api not OK')
         reject(res.data);
       })
       .catch(error => {
-        console.log('getMarketSummaries api error: ', JSON.stringify(error))
+        console.log('getMarketHeader api error: ', JSON.stringify(error))
         reject(error)
       })
   })
@@ -57,5 +58,5 @@ function getMarketSummaries<T>(): NetworkPromiseResponse<T> {
 
 export const apis = {
   login,
-  getMarketSummaries
+  getMarketHeader
 }
