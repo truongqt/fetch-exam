@@ -1,20 +1,20 @@
-export interface RequestErrors {
-    statusCode: number;
-    error: string;
-    message: string;
-  }
-  
-  export type CallBacks = ({data, error}:{data?: any, error?: RequestErrors}) => void;
-  
-  export interface CommonFetchParams {
-    isRequesting?: boolean;
-    isLoadMore?: boolean;
-    requestError?: RequestErrors;
-    callBack?: CallBacks;
-    payload?: any;
-    response?: any;
-  }
-  
-  export interface CommonSuccessResponse {
-    message: string;
-  }
+type ResponseStatus = 'success' | 'error';
+
+export interface RequestErrorModel {
+  status: ResponseStatus;
+  message: string;
+}
+export interface CommonRequestSuccessModel extends RequestErrorModel {
+  data?: any;
+}
+
+export type CallBackModel = ({ data, error }: { data?: any, error?: RequestErrorModel }) => void;
+
+export interface CommonFetchParamsModel {
+  isRequesting?: boolean;
+  isLoadMore?: boolean;
+  requestError?: RequestErrorModel;
+  callBack?: CallBackModel;
+  payload?: any;
+  response?: any;
+}

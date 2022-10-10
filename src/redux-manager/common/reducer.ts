@@ -1,11 +1,11 @@
-import { CommonFetchParams } from "redux-manager/commonType";
+import { CommonFetchParamsModel } from "redux-manager/commonType";
 import { commonActionTypes } from "./action";
 
-interface InitialStates extends CommonFetchParams {
+interface InitialStates extends CommonFetchParamsModel {
     showLoading: boolean;
 };
 
-export interface Actions extends CommonFetchParams {
+export interface Actions extends CommonFetchParamsModel {
     type: string;
 };
 
