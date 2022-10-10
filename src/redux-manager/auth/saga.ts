@@ -17,7 +17,7 @@ export interface LoginRequestModel extends CommonFetchParamsModel {
 
 export function* loginRequest(data: LoginRequestModel) {
     const { payload, callBack } = data;
-    // console.log('loginRequest datapayload: ', JSON.stringify(payload));
+    console.log('loginRequest datapayload: ', JSON.stringify(payload));
     const loginBody: LoginParams = {
         ...payload,
         captcha: "yWOEjZMIhY",
@@ -25,7 +25,7 @@ export function* loginRequest(data: LoginRequestModel) {
     }
     try {
         const response: LoginSuccessModel = yield apis.login(loginBody);
-        // console.log('saga success: ', JSON.stringify(response))
+        console.log('saga success: ', JSON.stringify(response))
         apisauces.setHeader("Authorization", `Bearer ${response.data.token}`)
         yield put(allActions.auth.loginSuccess(response));
 

@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { auth } from './auth/reducer';
 import { common } from './common/reducer';
+import { market } from './market/reducer';
 
 const appReducer = combineReducers({
     common,
     auth,
+    market
 });
 
 const rootReducer = (state: any, action: any) => {
