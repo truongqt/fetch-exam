@@ -5896,6 +5896,11 @@ react-native-config@^1.4.6:
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.4.6.tgz#2aefebf4d9cf02831e64bbc1307596bd212f6d42"
   integrity sha512-cSLdOfva2IPCxh6HjHN1IDVW9ratAvNnnAUx6ar2Byvr8KQU7++ysdFYPaoNVuJURuYoAKgvjab8ZcnwGZIO6Q==
 
+react-native-device-info@^10.2.1:
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-10.2.1.tgz#49189a73aba4804f61c5075c074d19db4a6e0f49"
+  integrity sha512-vXmcLThnCnrdhiJr7O4jaDY/xouFRshhGAU4HYkiSi5ShSXE+QqFQwKqICdHtw06VeX3ydZg3j0puG0lbTKVEA==
+
 react-native-flipper@^0.164.0:
   version "0.164.0"
   resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.164.0.tgz#64f6269a86a13a72e30f53ba9f5281d2073a7697"
@@ -5929,6 +5934,11 @@ react-native-screens@^3.18.0:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-user-agent@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-user-agent/-/react-native-user-agent-2.3.1.tgz#81308be0026d9d4e50cc8f1126068d58e6745868"
+  integrity sha512-AIFr1VgJHwgWmMwCOmIGxuBeAaADlouXKc10UyR4fzWneUbt5uIJIoRu2oExlfCtiT8IyCp106khDD5vx7RUjw==
 
 react-native@0.70.2:
   version "0.70.2"

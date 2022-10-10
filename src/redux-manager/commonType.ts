@@ -1,8 +1,8 @@
 type ResponseStatus = 'success' | 'error';
 
 export interface RequestErrorModel {
-  status: ResponseStatus;
-  message: string;
+  status?: ResponseStatus;
+  message?: string;
 }
 export interface CommonRequestSuccessModel extends RequestErrorModel {
   data?: any;

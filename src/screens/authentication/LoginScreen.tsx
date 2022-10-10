@@ -9,6 +9,7 @@ import React, {useState} from 'react';
 import {
   Button,
   Image,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -19,7 +20,11 @@ import {useDispatch} from 'react-redux';
 import allActions from 'redux-manager/allActions';
 import { LoginParams } from 'redux-manager/auth/saga';
 import {scale} from 'utils/helpers/device';
-import { apis } from 'utils/services/apis';
+import { apis, apisauces } from 'utils/services/apis';
+import { getUniqueId, getManufacturer } from 'react-native-device-info';
+import { ENDPOINTS } from 'utils/helpers/constants';
+import UserAgent from 'react-native-user-agent';
+
 
 const LoginScreen = () => {
   const distpatch = useDispatch();
@@ -58,19 +63,48 @@ const LoginScreen = () => {
   );
 
   const login = async () => {
+    const id = await getUniqueId();
+    const manu = await getManufacturer();
+  console.log('xx: ', id)
+  const ua = UserAgent.getUserAgent();
+  console.log('ua: ', ua)
+  const wvua = await UserAgent.getWebViewUserAgent();
+  console.log('wvua: ', wvua)
+
+    // apisauces.setHeader("User-Agent", wvua)
+    // apisauces.setHeader("User-Agent", Platform.OS + "/" + id)
+    // apisauces.setHeader("TOK-DEVICE-ID", id)
+    // apisauces.setHeaders({
+    //   "Accept": 'application/json, text/plain, */*',
+    //   'Content-Type': 'application/json; charset=utf-8',
+    //   'user-agent': Platform.OS,
+    //   'TOK-DEVICE-ID': x,
+    // });
     const loginData: LoginParams = {
       email: 'tokenize.test@gmail.com',
       password: 'Test#111',
+      captcha: "yWOEjZMIhY",
+      captchaBypass: "yWOEjZMIhY",
     };
-    distpatch(
-      allActions.auth.loginRequest({
-        payload: {
-          email: 'tokenize.test@gmail.com',
-          password: 'Test#111',
-        },
-      }),
-    );
+    // apisauces.post(ENDPOINTS.LOG_IN, loginData)
+    // // apisauces.get(ENDPOINTS.GET_MARKET_SUMMARIES)
+    // .then((result) => {
+    //   console.log('result: ', JSON.stringify(result))
+    // })
+    // .catch(error => {
+    //   console.log('error: ', JSON.stringify(error))
+    // })
+    // distpatch(
+    //   allActions.auth.loginRequest({
+    //     payload: {
+    //       email: 'tokenize.test@gmail.com',
+    //       password: 'Test#111',
+    //     },
+    //   }),
+    // );
     // navigation.navigate(MarketSummariesScreenName);
+
+    distpatch(allActions.market.getMarketHeaderRequest())
   }
 
   return (
