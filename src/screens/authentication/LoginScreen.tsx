@@ -17,7 +17,9 @@ import {
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import allActions from 'redux-manager/allActions';
+import { LoginParams } from 'redux-manager/auth/saga';
 import {scale} from 'utils/helpers/device';
+import { apis } from 'utils/services/apis';
 
 const LoginScreen = () => {
   const distpatch = useDispatch();
@@ -55,6 +57,22 @@ const LoginScreen = () => {
     </View>
   );
 
+  const login = async () => {
+    const loginData: LoginParams = {
+      email: 'tokenize.test@gmail.com',
+      password: 'Test#111',
+    };
+    distpatch(
+      allActions.auth.loginRequest({
+        payload: {
+          email: 'tokenize.test@gmail.com',
+          password: 'Test#111',
+        },
+      }),
+    );
+    // navigation.navigate(MarketSummariesScreenName);
+  }
+
   return (
     <View style={styles.container}>
       <Image source={images.auth_bg} style={styles.authBg} />
@@ -65,17 +83,7 @@ const LoginScreen = () => {
       {renderPasswordInput()}
       <Button
         title="Test"
-        onPress={() => {
-          distpatch(
-            allActions.auth.loginRequest({
-              payload: {
-                email: 'emaillll',
-                password: 'passsss',
-              },
-            }),
-          );
-          navigation.navigate(MarketSummariesScreenName);
-        }}
+        onPress={login}
       />
     </View>
   );
