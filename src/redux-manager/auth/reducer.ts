@@ -1,7 +1,7 @@
-import { CommonFetchParams, RequestErrors } from "redux-manager/commonType";
+import { CommonFetchParamsModel, RequestErrorModel } from "redux-manager/commonType";
 import { authActionTypes } from "./action";
 
-export interface Profile {
+export interface ProfileModel {
     userId: number;
     canAccessApi: boolean;
     email: string;
@@ -15,18 +15,18 @@ export interface Profile {
     token: string;
 };
 
-interface InitialStates extends CommonFetchParams {
-    profile: Profile;
+interface InitialStates extends CommonFetchParamsModel {
+    profile: ProfileModel;
 };
 
-export interface Actions extends CommonFetchParams {
+export interface Actions extends CommonFetchParamsModel {
     type: string;
 };
 
 const initialState: InitialStates = {
-    profile: {} as Profile,
+    profile: {} as ProfileModel,
     isRequesting: false,
-    requestError: {} as RequestErrors,
+    requestError: {} as RequestErrorModel,
 };
 
 export const auth = (
@@ -45,7 +45,7 @@ export const auth = (
 
             return {
                 ...state,
-                profile: action.response as Profile,
+                profile: action.response as ProfileModel,
                 isRequesting: false,
             }
         case authActionTypes.LOGIN_ERROR:
@@ -53,7 +53,7 @@ export const auth = (
             return {
                 ...state,
                 isRequesting: false,
-                requestError: action.response as RequestErrors,
+                requestError: action.response as RequestErrorModel,
             }
         default:
             return state;

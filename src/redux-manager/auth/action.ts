@@ -1,5 +1,6 @@
-import { CommonFetchParams, RequestErrors } from "redux-manager/commonType";
-import { LoginRequest } from "./saga";
+import { CommonFetchParamsModel, CommonRequestSuccessModel, RequestErrorModel } from "redux-manager/commonType";
+import { ProfileModel } from "./reducer";
+import { LoginRequestModel } from "./saga";
 
 export const authActionTypes = {
     LOGIN_REQUEST: 'LOGIN_REQUEST',
@@ -7,11 +8,11 @@ export const authActionTypes = {
     LOGIN_ERROR: 'LOGIN_ERROR'
 }
 
-export interface LoginSuccess extends CommonFetchParams {
-    response: any;
+export interface LoginSuccessModel extends CommonFetchParamsModel, CommonRequestSuccessModel {
+    data: ProfileModel;
 }
 
-export const loginRequest = (data: LoginRequest) => {
+export const loginRequest = (data: LoginRequestModel) => {
     return {
         type: authActionTypes.LOGIN_REQUEST,
         payload: data.payload,
@@ -19,7 +20,7 @@ export const loginRequest = (data: LoginRequest) => {
     }
 }
 
-export const loginSuccess = (data: LoginSuccess) => {
+export const loginSuccess = (data: LoginSuccessModel) => {
     return {
         type: authActionTypes.LOGIN_SUCCESS,
         response: data.response,
@@ -27,7 +28,7 @@ export const loginSuccess = (data: LoginSuccess) => {
     }
 }
 
-export const loginError = (error: RequestErrors) => {
+export const loginError = (error: RequestErrorModel) => {
     return {
         type: authActionTypes.LOGIN_ERROR,
         response: error,
