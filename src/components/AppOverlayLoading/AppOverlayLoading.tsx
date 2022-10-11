@@ -1,15 +1,14 @@
-import { colors } from 'assets';
 import React from 'react';
-import { ActivityIndicator, Dimensions, StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { RootState } from 'redux-manager/rootReducers';
-import { device } from 'utils/helpers/device';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {RootState} from 'redux-manager/rootReducers';
+import {device} from 'utils/helpers/device';
 
 const AppOverlayLoading = () => {
-  const { showLoading } = useSelector((state: RootState) => state.common);
+  const {showLoading} = useSelector((state: RootState) => state.common);
   return !showLoading ? null : (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color='blue' />
+      <ActivityIndicator size="large" color="blue" />
     </View>
   );
 };
