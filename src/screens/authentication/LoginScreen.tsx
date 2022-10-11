@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Button} from '@rneui/themed';
 import {colors, fonts, images} from 'assets';
 import {
   MarketSummariesScreenName,
@@ -7,9 +8,7 @@ import {
 } from 'navigation/ScreenProps';
 import React, {useState} from 'react';
 import {
-  Button,
   Image,
-  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -18,13 +17,8 @@ import {
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import allActions from 'redux-manager/allActions';
-import { LoginParams } from 'redux-manager/auth/saga';
+import {LoginParams} from 'redux-manager/auth/saga';
 import {scale} from 'utils/helpers/device';
-import { apis, apisauces } from 'utils/services/apis';
-import { getUniqueId, getManufacturer } from 'react-native-device-info';
-import { ENDPOINTS } from 'utils/helpers/constants';
-import UserAgent from 'react-native-user-agent';
-
 
 const LoginScreen = () => {
   const distpatch = useDispatch();
@@ -63,49 +57,25 @@ const LoginScreen = () => {
   );
 
   const login = async () => {
-    const id = await getUniqueId();
-    const manu = await getManufacturer();
-  console.log('xx: ', id)
-  const ua = UserAgent.getUserAgent();
-  console.log('ua: ', ua)
-  const wvua = await UserAgent.getWebViewUserAgent();
-  console.log('wvua: ', wvua)
-
-    // apisauces.setHeader("User-Agent", wvua)
-    // apisauces.setHeader("User-Agent", Platform.OS + "/" + id)
-    // apisauces.setHeader("TOK-DEVICE-ID", id)
-    // apisauces.setHeaders({
-    //   "Accept": 'application/json, text/plain, */*',
-    //   'Content-Type': 'application/json; charset=utf-8',
-    //   'user-agent': Platform.OS,
-    //   'TOK-DEVICE-ID': x,
-    // });
     const loginData: LoginParams = {
       email: 'tokenize.test@gmail.com',
       password: 'Test#111',
-      captcha: "yWOEjZMIhY",
-      captchaBypass: "yWOEjZMIhY",
+      captcha: 'yWOEjZMIhY',
+      captchaBypass: 'yWOEjZMIhY',
     };
-    // apisauces.post(ENDPOINTS.LOG_IN, loginData)
-    // // apisauces.get(ENDPOINTS.GET_MARKET_SUMMARIES)
-    // .then((result) => {
-    //   console.log('result: ', JSON.stringify(result))
-    // })
-    // .catch(error => {
-    //   console.log('error: ', JSON.stringify(error))
-    // })
-    // distpatch(
-    //   allActions.auth.loginRequest({
-    //     payload: {
-    //       email: 'tokenize.test@gmail.com',
-    //       password: 'Test#111',
-    //     },
-    //   }),
-    // );
+    distpatch(
+      allActions.auth.loginRequest({
+        payload: loginData,
+        callBack: ({data, error}) => {
+          if (data) {
+            navigation.navigate(MarketSummariesScreenName);
+          }
+        },
+      }),
+    );
     // navigation.navigate(MarketSummariesScreenName);
-
-    distpatch(allActions.market.getMarketHeaderRequest())
-  }
+    // distpatch(allActions.market.getMarketHeaderRequest());
+  };
 
   return (
     <View style={styles.container}>
@@ -115,10 +85,11 @@ const LoginScreen = () => {
       <Text style={styles.subTitle}>Please sign in to continue</Text>
       {renderEmailInput()}
       {renderPasswordInput()}
-      <Button
+      {/* <Button
         title="Test"
         onPress={login}
-      />
+      /> */}
+      <Button title="GOOOO" onPress={login} />
     </View>
   );
 };

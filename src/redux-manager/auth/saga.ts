@@ -28,7 +28,6 @@ export function* loginRequest(data: LoginRequestModel) {
         console.log('saga success: ', JSON.stringify(response))
         apisauces.setHeader("Authorization", `Bearer ${response.data.token}`)
         yield put(allActions.auth.loginSuccess(response));
-
         callBack && callBack({
             data: response,
             error: undefined,
@@ -44,10 +43,10 @@ export function* loginRequest(data: LoginRequestModel) {
 }
 
 export function* watchLoginRequest() {
-    while (true) {
+    // while (true) {
         // @ts-ignore
         const watcher = yield takeLatest(authActionTypes.LOGIN_REQUEST, loginRequest);
         // yield take('LOGOUT');
-        yield cancel(watcher);
-    }
+        // yield cancel(watcher);
+    // }
 }
