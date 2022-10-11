@@ -9,10 +9,10 @@
  */
 
 import AppOverlayLoading from 'components/AppOverlayLoading/AppOverlayLoading';
+import ErrorPopup from 'components/ErrorPopup/ErrorPopup';
 import AppNavigation from 'navigation/AppNavigation';
 import React from 'react';
 import {StyleSheet} from 'react-native';
-
 import {Provider} from 'react-redux';
 import rootStore from 'redux-manager/rootStore';
 
@@ -20,6 +20,7 @@ const App = () => {
   return (
     <Provider store={rootStore}>
       <AppNavigation />
+      <ErrorPopup/>
       <AppOverlayLoading />
     </Provider>
   );

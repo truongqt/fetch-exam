@@ -1,3 +1,4 @@
+import {colors} from 'assets';
 import React from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {useSelector} from 'react-redux';
@@ -8,7 +9,7 @@ const AppOverlayLoading = () => {
   const {showLoading} = useSelector((state: RootState) => state.common);
   return !showLoading ? null : (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color="blue" />
+      <ActivityIndicator size="large" color={colors.white} />
     </View>
   );
 };
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     width: device.width,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    backgroundColor: colors.black_40_percent,
     position: 'absolute',
     top: 0,
   },
