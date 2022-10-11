@@ -18,7 +18,7 @@ export interface MarketHeaderItemModel {
     listRoles: any
   }
 
-  export interface Title {
+  export interface TitleModel {
     title: string
   } 
   
@@ -51,7 +51,7 @@ export interface Actions extends CommonFetchParamsModel {
 const initialState: InitialStates = {
     marketHeader: {} as MarketHeaderModel,
     isRequesting: false,
-    requestError: {} as RequestErrorModel,
+    requestError: undefined
 };
 
 export const market = (
@@ -70,8 +70,9 @@ export const market = (
 
             return {
                 ...state,
-                marketHeader: action.response as MarketHeaderModel,
+                marketHeader: action.response.data as MarketHeaderModel,
                 isRequesting: false,
+                requestError: undefined,
             }
         case marketActionTypes.GET_MARKET_HEADER_ERROR:
             console.log('GET_MARKET_HEADER_ERROR....')

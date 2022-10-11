@@ -18,10 +18,8 @@ export function* getMarketHeaderRequest(data: GetMarketHeaderRequestModel) {
     console.log('loginRequest saga...');
     try {
         const response: GetMarketHeaderSuccessModel = yield apis.getMarketHeader();
-        // console.log('saga getMarketHeaderRequest success: ', JSON.stringify(response))
-        yield put(allActions.market.getMarketHeaderSuccess({
-            response: response.data,
-        }));
+        console.log('saga getMarketHeaderRequest success: ', JSON.stringify(response))
+        yield put(allActions.market.getMarketHeaderSuccess(response));
 
         callBack && callBack({
             data: response.data,
@@ -38,10 +36,10 @@ export function* getMarketHeaderRequest(data: GetMarketHeaderRequestModel) {
 }
 
 export function* watchGetMarketHeaderRequest() {
-    while (true) {
+    // while (true) {
         // @ts-ignore
         const watcher = yield takeLatest(marketActionTypes.GET_MARKET_HEADER_REQUEST, getMarketHeaderRequest);
         // yield take('LOGOUT');
-        yield cancel(watcher);
-    }
+        // yield cancel(watcher);
+    // }
 }

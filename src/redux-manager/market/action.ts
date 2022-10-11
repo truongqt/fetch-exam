@@ -11,18 +11,18 @@ export interface GetMarketHeaderSuccessModel extends CommonFetchParamsModel, Com
     data?: any;
 }
 
-export const getMarketHeaderRequest = (data?: GetMarketHeaderRequestModel) => {
+export const getMarketHeaderRequest = (getMarketHeaderRequestData: GetMarketHeaderRequestModel) => {
     return {
         type: marketActionTypes.GET_MARKET_HEADER_REQUEST,
-        callBack: data?.callBack
+        callBack: getMarketHeaderRequestData.callBack
     }
 }
 
-export const getMarketHeaderSuccess = (data: GetMarketHeaderSuccessModel) => {
+export const getMarketHeaderSuccess = (getMarketHeaderSuccessData: GetMarketHeaderSuccessModel) => {
     // console.log('aaaa: ', JSON.stringify(data))
     return {
         type: marketActionTypes.GET_MARKET_HEADER_SUCCESS,
-        response: data.response,
+        response: getMarketHeaderSuccessData,
     }
 }
 

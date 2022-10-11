@@ -19,7 +19,13 @@ export const colors = {
     cD6E1FF: '#D6E1FF',
     textInputBg: 'rgba(255, 255, 255, 0.1)',
     textInputBorder: 'rgba(255, 255, 255, 0.2)',
-    
+    cBDCFFF: '#BDCFFF',
+    c5073F2: '#5073F2',
+    signInBtnShadow: 'rgba(98, 120, 241, 0.5)',
+    c575E7A: '#575E7A',
+    black_40_percent: 'rgba(0, 0, 0, 0.4)',
+
+
 
     white_50_percent: 'rgba(255, 255, 255, 0.5)',
     c647FFF: '#647FFF',

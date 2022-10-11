@@ -12,7 +12,6 @@ export type CallBackModel = ({ data, error }: { data?: any, error?: RequestError
 
 export interface CommonFetchParamsModel {
   isRequesting?: boolean;
-  isLoadMore?: boolean;
   requestError?: RequestErrorModel;
   callBack?: CallBackModel;
   payload?: any;

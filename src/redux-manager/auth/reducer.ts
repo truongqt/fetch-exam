@@ -47,7 +47,7 @@ export const auth = (
 
             return {
                 ...state,
-                profile: action.response as ProfileModel,
+                profile: action.response.data as ProfileModel,
                 isRequesting: false,
                 requestError: undefined,
             }

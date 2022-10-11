@@ -1,7 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Button} from '@rneui/themed';
+import {Button, CheckBox, Text} from '@rneui/themed';
 import {colors, fonts, images} from 'assets';
+import {useShowLoading} from 'hooks/useShowLoading';
 import {
   MarketSummariesScreenName,
   StackParamList,
@@ -10,20 +11,55 @@ import React, {useState} from 'react';
 import {
   Image,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import allActions from 'redux-manager/allActions';
 import {LoginParams} from 'redux-manager/auth/saga';
+import {RootState} from 'redux-manager/rootReducers';
 import {scale} from 'utils/helpers/device';
 
 const LoginScreen = () => {
   const distpatch = useDispatch();
+  const {isRequesting} = useSelector((state: RootState) => state.auth);
+  useShowLoading(!!isRequesting);
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const [showPassword, setShowPassword] = useState(false);
+  const loginDataTest: LoginParams = {
+    email: 'tokenize.test@gmail.com',
+    password: 'Test#111',
+    captcha: 'yWOEjZMIhY',
+    captchaBypass: 'yWOEjZMIhY',
+  };
+  const [loginInputData, setLoginInputData] =
+    useState<LoginParams>(loginDataTest);
+  const [isRememberMe, setIsRememberMe] = useState(false);
+
+  const login = async () => {
+    const loginData: LoginParams = {
+      ...loginInputData,
+    };
+    distpatch(
+      allActions.auth.loginRequest({
+        payload: loginData,
+        callBack: ({data, error}) => {
+          if (data) {
+            navigation.navigate(MarketSummariesScreenName);
+          }
+          if(error){
+            distpatch(allActions.common.setErrorPopup({
+              show: true,
+              error: error
+            }))
+          }
+        },
+      }),
+    );
+    // navigation.navigate(MarketSummariesScreenName);
+    // distpatch(allActions.market.getMarketHeaderRequest());
+  };
 
   const renderEmailInput = () => (
     <View style={[styles.textInputContainer, {marginTop: scale(60)}]}>
@@ -32,6 +68,12 @@ const LoginScreen = () => {
         placeholder="Email"
         placeholderTextColor={colors.cD6E1FF}
         style={styles.textInput}
+        onChangeText={text =>
+          setLoginInputData({
+            ...loginInputData,
+            email: text.toString(),
+          })
+        }
       />
       <Image source={images.user_email} style={styles.textInputIcon} />
     </View>
@@ -44,6 +86,12 @@ const LoginScreen = () => {
         placeholder="Password"
         placeholderTextColor={colors.cD6E1FF}
         style={[styles.textInput, {paddingRight: scale(40)}]}
+        onChangeText={text =>
+          setLoginInputData({
+            ...loginInputData,
+            password: text.toString(),
+          })
+        }
       />
       <Image source={images.user_password} style={styles.textInputIcon} />
       <TouchableOpacity
@@ -56,26 +104,34 @@ const LoginScreen = () => {
     </View>
   );
 
-  const login = async () => {
-    const loginData: LoginParams = {
-      email: 'tokenize.test@gmail.com',
-      password: 'Test#111',
-      captcha: 'yWOEjZMIhY',
-      captchaBypass: 'yWOEjZMIhY',
-    };
-    distpatch(
-      allActions.auth.loginRequest({
-        payload: loginData,
-        callBack: ({data, error}) => {
-          if (data) {
-            navigation.navigate(MarketSummariesScreenName);
-          }
-        },
-      }),
-    );
-    // navigation.navigate(MarketSummariesScreenName);
-    // distpatch(allActions.market.getMarketHeaderRequest());
-  };
+  const renderRememberMe = () => (
+    <View
+      style={{
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
+        marginTop: scale(8),
+        paddingHorizontal: scale(10),
+        height: scale(50),
+      }}>
+      <View
+        style={{
+          flexDirection: 'row',
+        }}>
+        <CheckBox
+          title="Remember me"
+          textStyle={styles.checkBoxTitle}
+          checked={isRememberMe}
+          containerStyle={styles.checkBox}
+          checkedColor={colors.white}
+          onPress={() => setIsRememberMe(!isRememberMe)}
+        />
+      </View>
+      <Text style={styles.checkBoxTitle} onPress={() => {}}>
+        Forgot your password?
+      </Text>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -85,11 +141,33 @@ const LoginScreen = () => {
       <Text style={styles.subTitle}>Please sign in to continue</Text>
       {renderEmailInput()}
       {renderPasswordInput()}
-      {/* <Button
-        title="Test"
+      {renderRememberMe()}
+      <Button
+        title="SIGN IN"
         onPress={login}
-      /> */}
-      <Button title="GOOOO" onPress={login} />
+        buttonStyle={{
+          marginHorizontal: scale(10),
+          backgroundColor: colors.cBDCFFF,
+          height: scale(45),
+          marginTop: scale(90),
+          borderRadius: scale(6),
+          shadowColor: colors.signInBtnShadow,
+          elevation: 20,
+          shadowOffset: {
+            width: 0,
+            height: 10,
+          },
+          shadowOpacity: 0.2,
+          shadowRadius: 2,
+        }}
+        titleStyle={styles.signInTxt}
+      />
+      <Text style={styles.dontHaveAccountTxt}>
+        Don’t have an account yet?
+        <Text style={styles.signUpTxt} onPress={() => {}}>
+          {` SIGN UP`}
+        </Text>
+      </Text>
     </View>
   );
 };
@@ -171,5 +249,43 @@ const styles = StyleSheet.create({
     width: scale(19),
     height: scale(13),
     resizeMode: 'contain',
+  },
+  checkBox: {
+    backgroundColor: 'transparent',
+    padding: 5,
+    marginLeft: 0,
+    marginRight: scale(8),
+  },
+  checkBoxTitle: {
+    fontFamily: fonts.Roboto.regular,
+    fontWeight: '500',
+    fontSize: scale(14),
+    lineHeight: scale(21),
+    color: colors.white,
+  },
+  signInTxt: {
+    fontFamily: fonts.Roboto.bold,
+    fontWeight: '700',
+    fontSize: scale(14),
+    lineHeight: scale(16),
+    letterSpacing: scale(0.5),
+    color: colors.c5073F2,
+  },
+  dontHaveAccountTxt: {
+    fontFamily: fonts.Roboto.bold,
+    fontWeight: '700',
+    fontSize: scale(14),
+    lineHeight: scale(24),
+    color: colors.white,
+    textAlign: 'center',
+    marginTop: scale(20),
+  },
+  signUpTxt: {
+    fontFamily: fonts.Roboto.bold,
+    fontWeight: '400',
+    fontSize: scale(14),
+    lineHeight: scale(24),
+    color: colors.white,
+    // backgroundColor: colors.c575E7A,
   },
 });
