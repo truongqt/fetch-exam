@@ -12,19 +12,20 @@ export interface LoginSuccessModel extends CommonFetchParamsModel, CommonRequest
     data: ProfileModel;
 }
 
-export const loginRequest = (data: LoginRequestModel) => {
+export const loginRequest = (loginRequestData: LoginRequestModel) => {
     return {
         type: authActionTypes.LOGIN_REQUEST,
-        payload: data.payload,
-        callBack: data.callBack
+        payload: loginRequestData.payload,
+        callBack: loginRequestData.callBack
     }
 }
 
-export const loginSuccess = (data: LoginSuccessModel) => {
+export const loginSuccess = (loginSuccessData: LoginSuccessModel) => {
+    // console.log({loginSuccessData})
     return {
         type: authActionTypes.LOGIN_SUCCESS,
-        response: data.response,
-        callBack: data.callBack
+        response: loginSuccessData.data,
+        callBack: loginSuccessData.callBack
     }
 }
 

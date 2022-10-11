@@ -13,6 +13,8 @@ export interface ProfileModel {
     tkxTrading: boolean;
     userType: string;
     token: string;
+    refreshToken: string;
+    algoInvited: any;
 };
 
 interface InitialStates extends CommonFetchParamsModel {
@@ -26,12 +28,12 @@ export interface Actions extends CommonFetchParamsModel {
 const initialState: InitialStates = {
     profile: {} as ProfileModel,
     isRequesting: false,
-    requestError: {} as RequestErrorModel,
+    requestError: undefined,
 };
 
 export const auth = (
     state = initialState,
-    action: Actions = {type: '', response: undefined}
+    action: Actions = { type: '', response: undefined }
 ) => {
     switch (action.type) {
         case authActionTypes.LOGIN_REQUEST:
@@ -41,12 +43,13 @@ export const auth = (
                 isRequesting: true,
             }
         case authActionTypes.LOGIN_SUCCESS:
-            console.log('LOGIN_SUCCESS....')
+            console.log('LOGIN_SUCCESS: ', JSON.stringify(action))
 
             return {
                 ...state,
                 profile: action.response as ProfileModel,
                 isRequesting: false,
+                requestError: undefined,
             }
         case authActionTypes.LOGIN_ERROR:
             console.log('LOGIN_ERROR....')
