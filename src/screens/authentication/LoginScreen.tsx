@@ -16,10 +16,13 @@ import {
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useDispatch, useSelector} from 'react-redux';
 import allActions from 'redux-manager/allActions';
+import {LoginSuccessModel} from 'redux-manager/auth/action';
 import {LoginParams} from 'redux-manager/auth/saga';
 import {RootState} from 'redux-manager/rootReducers';
+import {SAVED_USER_PROFILE} from 'utils/helpers/constants';
 import {scale} from 'utils/helpers/device';
 import {validateEmail} from 'utils/helpers/functions';
+import storage from 'utils/helpers/storage';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -74,8 +77,12 @@ const LoginScreen = () => {
     dispatch(
       allActions.auth.loginRequest({
         payload: loginData,
-        callBack: ({data, error}) => {
+        callBack: async ({data, error}) => {
           if (data) {
+            const response = data as LoginSuccessModel;
+            if (isRememberMe) {
+              await storage.save(SAVED_USER_PROFILE, response.data);
+            }
             navigation.navigate(MainNavigationName);
           }
           if (error) {

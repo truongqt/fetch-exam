@@ -15,6 +15,7 @@ const MarketsList = () => {
   const onRefresh = () => {
     dispatch(allActions.market.getMarketsListRequest({}));
   };
+  
   return (
     <FlatList
       keyboardShouldPersistTaps="handled"
