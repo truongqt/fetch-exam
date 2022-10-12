@@ -3,13 +3,12 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {Button, CheckBox, Text} from '@rneui/themed';
 import {colors, fonts, images} from 'assets';
 import {useShowLoading} from 'hooks/useShowLoading';
-import {
-  MainNavigationName,
-  StackParamList,
-} from 'navigation/ScreenProps';
+import {MainNavigationName, StackParamList} from 'navigation/ScreenProps';
 import React, {useState} from 'react';
 import {
   Image,
+  KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -19,8 +18,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import allActions from 'redux-manager/allActions';
 import {LoginParams} from 'redux-manager/auth/saga';
 import {RootState} from 'redux-manager/rootReducers';
-import {scale} from 'utils/helpers/device';
+import {device, scale} from 'utils/helpers/device';
 import {useTranslation} from 'react-i18next';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const LoginScreen = () => {
   const distpatch = useDispatch();
@@ -29,7 +29,7 @@ const LoginScreen = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   const {t, i18n} = useTranslation();
-  const [currentLanguage,setLanguage] =useState('en');
+  const [currentLanguage, setLanguage] = useState('en');
   const [showPassword, setShowPassword] = useState(false);
   const loginDataTest: LoginParams = {
     email: 'tokenize.test@gmail.com',
@@ -42,7 +42,7 @@ const LoginScreen = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
 
   const changeLanguage = (value: any) => {
-    console.log('value: ', value)
+    console.log('value: ', value);
     i18n
       .changeLanguage(value)
       .then(() => setLanguage(value))
@@ -60,11 +60,13 @@ const LoginScreen = () => {
           if (data) {
             navigation.navigate(MainNavigationName);
           }
-          if(error){
-            distpatch(allActions.common.setErrorPopup({
-              show: true,
-              error: error
-            }))
+          if (error) {
+            distpatch(
+              allActions.common.setErrorPopup({
+                show: true,
+                error: error,
+              }),
+            );
           }
         },
       }),
@@ -75,7 +77,7 @@ const LoginScreen = () => {
     <View style={[styles.textInputContainer, {marginTop: scale(60)}]}>
       <TextInput
         keyboardType="email-address"
-        placeholder={t("Email")}
+        placeholder={t('Email')}
         placeholderTextColor={colors.cD6E1FF}
         style={styles.textInput}
         onChangeText={text =>
@@ -93,7 +95,7 @@ const LoginScreen = () => {
     <View style={[styles.textInputContainer, {marginTop: scale(10)}]}>
       <TextInput
         secureTextEntry={!showPassword}
-        placeholder={t("Password")}
+        placeholder={t('Password')}
         placeholderTextColor={colors.cD6E1FF}
         style={[styles.textInput, {paddingRight: scale(40)}]}
         onChangeText={text =>
@@ -129,7 +131,7 @@ const LoginScreen = () => {
           flexDirection: 'row',
         }}>
         <CheckBox
-          title={t("Remember me")}
+          title={t('Remember me')}
           textStyle={styles.checkBoxTitle}
           checked={isRememberMe}
           containerStyle={styles.checkBox}
@@ -138,7 +140,7 @@ const LoginScreen = () => {
         />
       </View>
       <Text style={styles.checkBoxTitle} onPress={() => {}}>
-        {t("Forgot your password?")}
+        {t('Forgot your password?')}
       </Text>
     </View>
   );
@@ -146,44 +148,45 @@ const LoginScreen = () => {
   return (
     <View style={styles.container}>
       <Image source={images.auth_bg} style={styles.authBg} />
-      <Image source={images.auth_logo} style={styles.authLogo} />
-      <Text style={styles.title}>{t("Sign in")}</Text>
-      <Text style={styles.subTitle}>{t("Please sign in to continue")}</Text>
-      {renderEmailInput()}
-      {renderPasswordInput()}
-      {renderRememberMe()}
-      <Button
-        title={t('SIGN IN')}
-        onPress={login}
-        buttonStyle={{
-          marginHorizontal: scale(10),
-          backgroundColor: colors.cBDCFFF,
-          height: scale(45),
-          marginTop: scale(90),
-          borderRadius: scale(6),
-          shadowColor: colors.signInBtnShadow,
-          elevation: 20,
-          shadowOffset: {
-            width: 0,
-            height: 10,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 2,
-        }}
-        titleStyle={styles.signInTxt}
-      />
-      <Text style={styles.dontHaveAccountTxt}>
-        {t("Don’t have an account yet?")}
-        <Text style={styles.signUpTxt} onPress={() => {}}>
-          {` `}{t("SIGN UP")}
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled">
+        <Image source={images.auth_logo} style={styles.authLogo} />
+        <Text style={styles.title}>{t('Sign in')}</Text>
+        <Text style={styles.subTitle}>{t('Please sign in to continue')}</Text>
+        {renderEmailInput()}
+        {renderPasswordInput()}
+        {renderRememberMe()}
+        <Button
+          title={t('SIGN IN')}
+          onPress={login}
+          containerStyle={{
+            marginTop: scale(90),
+          }}
+          buttonStyle={{
+            marginHorizontal: scale(10),
+            backgroundColor: colors.cBDCFFF,
+            height: scale(45),
+            borderRadius: scale(6),
+            shadowColor: colors.signInBtnShadow,
+            elevation: 20,
+            shadowOffset: {
+              width: 0,
+              height: 10,
+            },
+            shadowOpacity: 0.2,
+            shadowRadius: 2,
+          }}
+          titleStyle={styles.signInTxt}
+        />
+        <Text style={styles.dontHaveAccountTxt}>
+          {t('Don’t have an account yet?')}
+          <Text style={styles.signUpTxt} onPress={() => {}}>
+            {` `}
+            {t('SIGN UP')}
+          </Text>
         </Text>
-      </Text>
-      <Button 
-        title='Change language'
-        onPress={()=>{
-          changeLanguage('vi')
-        }}
-      />
+      </KeyboardAwareScrollView>
     </View>
   );
 };
@@ -302,6 +305,5 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     lineHeight: scale(24),
     color: colors.white,
-    // backgroundColor: colors.c575E7A,
   },
 });

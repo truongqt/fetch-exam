@@ -1,7 +1,7 @@
 import { CommonFetchParamsModel, RequestErrorModel } from "redux-manager/commonType";
 import { marketActionTypes } from "./action";
 
-export interface MarketHeaderItemModel {
+export interface MarketHeaderSubListItemModel {
     id: number
     marketId: string
     marketName: string
@@ -18,30 +18,13 @@ export interface MarketHeaderItemModel {
     listRoles: any
   }
 
-  export interface TitleModel {
-    title: string
-  } 
-  
-  export interface MarketHeaderModel {
-
+export interface MarketHeaderItemModel {
+    list: MarketHeaderSubListItemModel[];
+    title: string;
   }
 
-export interface MarketHeaderModel {
-    userId: number;
-    canAccessApi: boolean;
-    email: string;
-    roleId: number;
-    roleName: string;
-    roleType: string;
-    is2Faenabled: number;
-    emailNotificationStatus: boolean;
-    tkxTrading: boolean;
-    userType: string;
-    token: string;
-};
-
 interface InitialStates extends CommonFetchParamsModel {
-    marketHeader: MarketHeaderModel;
+    marketHeader: MarketHeaderItemModel[];
 };
 
 export interface Actions extends CommonFetchParamsModel {
@@ -49,7 +32,7 @@ export interface Actions extends CommonFetchParamsModel {
 };
 
 const initialState: InitialStates = {
-    marketHeader: {} as MarketHeaderModel,
+    marketHeader: [] as MarketHeaderItemModel[],
     isRequesting: false,
     requestError: undefined
 };
@@ -67,7 +50,7 @@ export const market = (
         case marketActionTypes.GET_MARKET_HEADER_SUCCESS:
             return {
                 ...state,
-                marketHeader: action.response.data as MarketHeaderModel,
+                marketHeader: action.response.data as MarketHeaderItemModel[],
                 isRequesting: false,
                 requestError: undefined,
             }
