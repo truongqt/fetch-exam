@@ -12,4 +12,4 @@ Additional info:
     + Fetch API: apisauce
     + Mutiple language: i18next
     + UI library: https://reactnativeelements.com/
-- Use Flipper to debug: https://fbflipper.com/docs/features/react-native/
+- Use Flipper to debug, find out more here: https://fbflipper.com/docs/features/react-native/
