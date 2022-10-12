@@ -20,12 +20,11 @@ export const loginRequest = (loginRequestData: LoginRequestModel) => {
     }
 }
 
-export const loginSuccess = (loginSuccessData: LoginSuccessModel) => {
-    // console.log({loginSuccessData})
+export const loginSuccess = (loginSuccessResponse: LoginSuccessModel) => {
     return {
         type: authActionTypes.LOGIN_SUCCESS,
-        response: loginSuccessData,
-        callBack: loginSuccessData.callBack
+        response: loginSuccessResponse,
+        callBack: loginSuccessResponse.callBack
     }
 }
 

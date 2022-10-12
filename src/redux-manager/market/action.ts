@@ -18,11 +18,10 @@ export const getMarketHeaderRequest = (getMarketHeaderRequestData: GetMarketHead
     }
 }
 
-export const getMarketHeaderSuccess = (getMarketHeaderSuccessData: GetMarketHeaderSuccessModel) => {
-    // console.log('aaaa: ', JSON.stringify(data))
+export const getMarketHeaderSuccess = (getMarketHeaderSuccessResponse: GetMarketHeaderSuccessModel) => {
     return {
         type: marketActionTypes.GET_MARKET_HEADER_SUCCESS,
-        response: getMarketHeaderSuccessData,
+        response: getMarketHeaderSuccessResponse,
     }
 }
 

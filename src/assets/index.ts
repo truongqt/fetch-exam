@@ -6,6 +6,11 @@ export const images = {
     user_email: require('./images/user_email.png'),
     user_password: require('./images/user_password.png'),
     show_password: require('./images/show_password.png'),
+    home_icon: require('./images/home_icon.png'),
+    markets_icon: require('./images/markets_icon.png'),
+    wallets_icon: require('./images/wallets_icon.png'),
+    portfolio_icon: require('./images/portfolio_icon.png'),
+    more_icon: require('./images/more_icon.png'),
 }
 
 export const fonts = {
@@ -26,6 +31,8 @@ export const colors = {
     signInBtnShadow: 'rgba(98, 120, 241, 0.5)',
     c575E7A: '#575E7A',
     black_40_percent: 'rgba(0, 0, 0, 0.4)',
+    c9194BB: '#9194BB',
+    c597AF4: '#597AF4',
 
 
 
