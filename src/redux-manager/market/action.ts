@@ -1,4 +1,5 @@
 import { CommonFetchParamsModel, CommonRequestSuccessModel, RequestErrorModel } from "redux-manager/commonType";
+import { MarketHeaderItemModel } from "./reducer";
 import { GetMarketHeaderRequestModel } from "./saga";
 
 export const marketActionTypes = {
@@ -8,7 +9,7 @@ export const marketActionTypes = {
 }
 
 export interface GetMarketHeaderSuccessModel extends CommonFetchParamsModel, CommonRequestSuccessModel {
-    data?: any;
+    data?: MarketHeaderItemModel[];
 }
 
 export const getMarketHeaderRequest = (getMarketHeaderRequestData: GetMarketHeaderRequestModel) => {

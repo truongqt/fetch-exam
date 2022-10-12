@@ -11,6 +11,7 @@ export const images = {
     wallets_icon: require('./images/wallets_icon.png'),
     portfolio_icon: require('./images/portfolio_icon.png'),
     more_icon: require('./images/more_icon.png'),
+    search_icon: require('./images/search_icon.png'),
 }
 
 export const fonts = {
@@ -33,6 +34,9 @@ export const colors = {
     black_40_percent: 'rgba(0, 0, 0, 0.4)',
     c9194BB: '#9194BB',
     c597AF4: '#597AF4',
+    c6992FF: '#6992FF',
+    cE4E9F9: '#E4E9F9',
+    c8E92B2: '#8E92B2',
 
 
 
