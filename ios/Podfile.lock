@@ -388,6 +388,8 @@ PODS:
     - React-Core
   - RNGestureHandler (2.7.0):
     - React-Core
+  - RNLocalize (2.2.4):
+    - React-Core
   - RNScreens (3.18.0):
     - React-Core
     - React-RCTImage
@@ -464,6 +466,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNLocalize (from `../node_modules/react-native-localize`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -567,6 +570,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNLocalize:
+    :path: "../node_modules/react-native-localize"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNVectorIcons:
@@ -628,6 +633,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 0c357f3156fcb16c8589ede67cc036330b6698ca
   RNDeviceInfo: c31137f22ee779fe3931d1a8d60cc1af80ef4077
   RNGestureHandler: 7673697e7c0e9391adefae4faa087442bc04af33
+  RNLocalize: 0df7970cfc60389f00eb62fd7c097dc75af3fb4f
   RNScreens: f3230dd008a7d0ce5c0a8bc78ff12cf2315bda24
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608

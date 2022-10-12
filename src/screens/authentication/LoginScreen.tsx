@@ -20,12 +20,16 @@ import allActions from 'redux-manager/allActions';
 import {LoginParams} from 'redux-manager/auth/saga';
 import {RootState} from 'redux-manager/rootReducers';
 import {scale} from 'utils/helpers/device';
+import {useTranslation} from 'react-i18next';
 
 const LoginScreen = () => {
   const distpatch = useDispatch();
   const {isRequesting} = useSelector((state: RootState) => state.auth);
   useShowLoading(!!isRequesting);
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+
+  const {t, i18n} = useTranslation();
+  const [currentLanguage,setLanguage] =useState('en');
   const [showPassword, setShowPassword] = useState(false);
   const loginDataTest: LoginParams = {
     email: 'tokenize.test@gmail.com',
@@ -36,6 +40,14 @@ const LoginScreen = () => {
   const [loginInputData, setLoginInputData] =
     useState<LoginParams>(loginDataTest);
   const [isRememberMe, setIsRememberMe] = useState(false);
+
+  const changeLanguage = (value: any) => {
+    console.log('value: ', value)
+    i18n
+      .changeLanguage(value)
+      .then(() => setLanguage(value))
+      .catch(err => console.log(err));
+  };
 
   const login = async () => {
     const loginData: LoginParams = {
@@ -65,7 +77,7 @@ const LoginScreen = () => {
     <View style={[styles.textInputContainer, {marginTop: scale(60)}]}>
       <TextInput
         keyboardType="email-address"
-        placeholder="Email"
+        placeholder={t("Email")}
         placeholderTextColor={colors.cD6E1FF}
         style={styles.textInput}
         onChangeText={text =>
@@ -83,7 +95,7 @@ const LoginScreen = () => {
     <View style={[styles.textInputContainer, {marginTop: scale(10)}]}>
       <TextInput
         secureTextEntry={!showPassword}
-        placeholder="Password"
+        placeholder={t("Password")}
         placeholderTextColor={colors.cD6E1FF}
         style={[styles.textInput, {paddingRight: scale(40)}]}
         onChangeText={text =>
@@ -119,7 +131,7 @@ const LoginScreen = () => {
           flexDirection: 'row',
         }}>
         <CheckBox
-          title="Remember me"
+          title={t("Remember me")}
           textStyle={styles.checkBoxTitle}
           checked={isRememberMe}
           containerStyle={styles.checkBox}
@@ -128,7 +140,7 @@ const LoginScreen = () => {
         />
       </View>
       <Text style={styles.checkBoxTitle} onPress={() => {}}>
-        Forgot your password?
+        {t("Forgot your password?")}
       </Text>
     </View>
   );
@@ -137,13 +149,13 @@ const LoginScreen = () => {
     <View style={styles.container}>
       <Image source={images.auth_bg} style={styles.authBg} />
       <Image source={images.auth_logo} style={styles.authLogo} />
-      <Text style={styles.title}>Sign in</Text>
-      <Text style={styles.subTitle}>Please sign in to continue</Text>
+      <Text style={styles.title}>{t("Sign in")}</Text>
+      <Text style={styles.subTitle}>{t("Please sign in to continue")}</Text>
       {renderEmailInput()}
       {renderPasswordInput()}
       {renderRememberMe()}
       <Button
-        title="SIGN IN"
+        title={t('SIGN IN')}
         onPress={login}
         buttonStyle={{
           marginHorizontal: scale(10),
@@ -163,11 +175,17 @@ const LoginScreen = () => {
         titleStyle={styles.signInTxt}
       />
       <Text style={styles.dontHaveAccountTxt}>
-        Don’t have an account yet?
+        {t("Don’t have an account yet?")}
         <Text style={styles.signUpTxt} onPress={() => {}}>
-          {` SIGN UP`}
+          {` `}{t("SIGN UP")}
         </Text>
       </Text>
+      <Button 
+        title='Change language'
+        onPress={()=>{
+          changeLanguage('vi')
+        }}
+      />
     </View>
   );
 };
