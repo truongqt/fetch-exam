@@ -5,7 +5,6 @@ import {colors, fonts, images} from 'assets';
 import {useShowLoading} from 'hooks/useShowLoading';
 import {
   MainNavigationName,
-  MarketSummariesScreenName,
   StackParamList,
 } from 'navigation/ScreenProps';
 import React, {useState} from 'react';
@@ -70,8 +69,6 @@ const LoginScreen = () => {
         },
       }),
     );
-    // navigation.navigate(MarketSummariesScreenName);
-    // distpatch(allActions.market.getMarketHeaderRequest());
   };
 
   const renderEmailInput = () => (

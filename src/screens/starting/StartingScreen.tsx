@@ -4,7 +4,6 @@ import {DEFAULT_HEADERS} from 'apisauce';
 import {
   LoginScreenName,
   MainNavigationName,
-  MarketSummariesScreenName,
   StackParamList,
 } from 'navigation/ScreenProps';
 import React, {useEffect} from 'react';

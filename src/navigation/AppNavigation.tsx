@@ -3,12 +3,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import LoginScreen from 'screens/authentication/LoginScreen';
-import MarketSummariesScreen from 'screens/market-summaries/MarketSummariesScreen';
 import StartingScreen from 'screens/starting/StartingScreen';
 import {
   LoginScreenName,
   MainNavigationName,
-  MarketSummariesScreenName,
   StartingScreenName,
 } from './ScreenProps';
 import MainNavigation from './stack/MainNavigation';
@@ -26,11 +24,7 @@ const AppNavigation = () => {
           }}>
           <Stack.Screen name={StartingScreenName} component={StartingScreen} />
           <Stack.Screen name={LoginScreenName} component={LoginScreen} />
-          {/* <Stack.Screen
-            name={MarketSummariesScreenName}
-            component={MarketSummariesScreen}
-          /> */}
-          <Stack.Screen name={MainNavigationName} component={MainNavigation}/>
+          <Stack.Screen name={MainNavigationName} component={MainNavigation} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

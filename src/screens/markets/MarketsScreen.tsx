@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import allActions from 'redux-manager/allActions';
 
-const MarketSummariesScreen = () => {
+const MarketsScreen = () => {
 
   const dispatch = useDispatch();
 
@@ -13,11 +13,11 @@ const MarketSummariesScreen = () => {
   
   return (
     <View style={{padding: 50}}>
-      <Text>MarketSummariesScreen</Text>
+      <Text>MarketsScreen</Text>
     </View>
   )
 }
 
-export default MarketSummariesScreen
+export default MarketsScreen
 
 const styles = StyleSheet.create({})
