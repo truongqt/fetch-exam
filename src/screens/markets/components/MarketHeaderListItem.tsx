@@ -1,10 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {memo, useEffect} from 'react';
-import {useSelector} from 'react-redux';
-import {RootState} from 'redux-manager/rootReducers';
 import {Button} from '@rneui/themed';
-import {scale} from 'utils/helpers/device';
 import {colors, fonts} from 'assets';
+import React, {memo} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {scale} from 'utils/helpers/device';
 
 interface Props {
   title: string;
@@ -17,11 +15,6 @@ const MarketHeaderListItem = ({
   selectedItem,
   setSelectedItem,
 }: Props) => {
-  const marketHeaderItem = useSelector((state: RootState) =>
-    state.market.marketHeader.find(item => item.title === title),
-  );
-  console.log({title})
-
   return (
     <View>
       <Button
