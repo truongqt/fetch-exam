@@ -12,47 +12,20 @@ import AppOverlayLoading from 'components/AppOverlayLoading/AppOverlayLoading';
 import ErrorPopup from 'components/ErrorPopup/ErrorPopup';
 import AppNavigation from 'navigation/AppNavigation';
 import React from 'react';
-import {LogBox, StyleSheet} from 'react-native';
+import {LogBox} from 'react-native';
 import {Provider} from 'react-redux';
 import rootStore from 'redux-manager/rootStore';
 
-LogBox.ignoreLogs([
-  // 'Warning: ...',
-  // 'Warning: componentWillReceiveProp',
-  'Require cycle:',
-  'remote notifications',
-  'componentWillReceiveProps',
-  'Looks like '
-  // .....
-]);
+LogBox.ignoreLogs(['Looks like ']);
 
 const App = () => {
   return (
     <Provider store={rootStore}>
       <AppNavigation />
-      <ErrorPopup/>
+      <ErrorPopup />
       <AppOverlayLoading />
     </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

@@ -57,7 +57,7 @@ const MainTabs = () => {
         }}>
         <Tab.Screen
           name="HomeTab"
-          component={HomeStack}
+          component={()=><></>}
           options={{
             tabBarIcon: ({focused}) => (
               <>
@@ -91,7 +91,7 @@ const MainTabs = () => {
         />
         <Tab.Screen
           name="WalletsTab"
-          component={HomeStack}
+          component={()=><></>}
           options={{
             tabBarIcon: ({focused}) => (
               <>
@@ -110,7 +110,7 @@ const MainTabs = () => {
         />
         <Tab.Screen
           name="PortfolioTab"
-          component={HomeStack}
+          component={()=><></>}
           options={{
             tabBarIcon: ({focused}) => (
               <>
@@ -137,7 +137,7 @@ const MainTabs = () => {
         />
         <Tab.Screen
           name="MoreTab"
-          component={HomeStack}
+          component={()=><></>}
           options={{
             tabBarIcon: ({focused}) => (
               <>
