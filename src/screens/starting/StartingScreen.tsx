@@ -16,6 +16,7 @@ import {apisauces} from 'utils/services/apis';
 
 const StartingScreen = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+  
   useEffect(() => {
     const checkAccessToken = async () => {
       const deviceId = await getUniqueId();

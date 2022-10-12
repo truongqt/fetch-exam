@@ -42,8 +42,8 @@ const MainTabs = () => {
           tabBarShowLabel: false,
           tabBarStyle: {
             height: tabBarHeight,
-            backgroundColor: 'white',
-            shadowColor: 'black',
+            backgroundColor: colors.white,
+            shadowColor: colors.black,
             elevation: 20,
             shadowOffset: {
               width: 0,
