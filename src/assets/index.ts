@@ -40,4 +40,6 @@ export const colors = {
     cEBEDFB: '#EBEDFB',
     c3D436C: '#3D436C',
     c3BBA7D: '#3BBA7D',
+    cFAFBFE: '#FAFBFE',
+    cEEF0FA: '#EEF0FA'
 }

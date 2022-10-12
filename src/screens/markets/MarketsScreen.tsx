@@ -47,7 +47,7 @@ const MarketsScreen = () => {
 
   return (
     <LinearGradient
-      colors={['#FAFBFE', '#EEF0FA']}
+      colors={[colors.cFAFBFE, colors.cEEF0FA]}
       locations={[0, 1]}
       useAngle={true}
       angle={225}>
@@ -77,10 +77,7 @@ const MarketsScreen = () => {
               }}
             />
           )}
-          contentContainerStyle={{
-            paddingLeft: scale(15),
-            paddingBottom: scale(11),
-          }}
+          contentContainerStyle={styles.flatlistContentContainerStyle}
         />
         <MarketsList />
       </View>
@@ -111,4 +108,8 @@ const styles = StyleSheet.create({
     height: scale(18),
     resizeMode: 'contain',
   },
+  flatlistContentContainerStyle: {
+    paddingLeft: scale(15),
+    paddingBottom: scale(11),
+  }
 });
