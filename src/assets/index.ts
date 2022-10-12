@@ -23,6 +23,7 @@ export const fonts = {
 
 export const colors = {
     white: 'white',
+    black: 'black',
     cD6DFFF: '#D6DFFF',
     cD6E1FF: '#D6E1FF',
     textInputBg: 'rgba(255, 255, 255, 0.1)',

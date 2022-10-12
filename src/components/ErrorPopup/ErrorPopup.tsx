@@ -1,6 +1,7 @@
 import {Button, Text} from '@rneui/themed';
 import {colors, fonts} from 'assets';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import allActions from 'redux-manager/allActions';
@@ -10,6 +11,7 @@ import {device, scale} from 'utils/helpers/device';
 const ErrorPopup = () => {
   const dispatch = useDispatch();
   const {errorPopup} = useSelector((state: RootState) => state.common);
+  const {t} = useTranslation();
 
   const hideErrorPopup = () => {
     dispatch(
@@ -24,7 +26,7 @@ const ErrorPopup = () => {
     <View style={styles.container}>
       <View style={styles.panel}>
         <Text style={styles.errorTxt}>{errorPopup?.error?.message}</Text>
-        <Button title="OK" onPress={hideErrorPopup} buttonStyle={styles.btn} />
+        <Button title={t("OK")} onPress={hideErrorPopup} buttonStyle={styles.btn} />
       </View>
     </View>
   );
