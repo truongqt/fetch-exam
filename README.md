@@ -1,5 +1,5 @@
 Steps to run:
-1. Checkout branch dev: "gco dev"
+1. Clone repo, run on branch master.
 2. Install node modules: "yarn install"
 3. Run pod install: "cd ios && pod install"
 4. Go back: "cd .."
