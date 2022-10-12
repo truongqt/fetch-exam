@@ -1,21 +1,17 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import {MarketSummariesScreenName} from 'navigation/ScreenProps';
+import {MarketsScreenName} from 'navigation/ScreenProps';
 import React from 'react';
-import MarketSummariesScreen from 'screens/market-summaries/MarketSummariesScreen';
+import MarketsScreen from 'screens/markets/MarketsScreen';
 
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
   return (
     <Stack.Navigator
-        screenOptions={{
-            headerShown: false,
-        }}
-    >
-      <Stack.Screen
-        name={MarketSummariesScreenName}
-        component={MarketSummariesScreen}
-      />
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name={MarketsScreenName} component={MarketsScreen} />
     </Stack.Navigator>
   );
 };

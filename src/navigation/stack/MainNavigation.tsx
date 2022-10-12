@@ -27,7 +27,7 @@ const MainTabs = () => {
       <Image source={image} style={styles.icon} />
       <Text
         style={{
-          fontFamily: fonts.Roboto.regular,
+          fontFamily: fonts.Roboto.bold,
           fontWeight: '500',
           fontSize: scale(13),
           lineHeight: scale(15.23),
@@ -57,7 +57,7 @@ const MainTabs = () => {
             },
             shadowOpacity: 0.22,
             shadowRadius: 2.22,
-            paddingVertical: scale(insets.bottom / 2),
+            paddingVertical: scale(insets.bottom / 3),
             },
             tabBarHideOnKeyboard: !isIos()
         }}
