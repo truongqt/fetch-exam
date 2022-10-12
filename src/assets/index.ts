@@ -1,3 +1,5 @@
+import './i18n/i18n'
+
 export const images = {
     auth_bg: require('./images/auth_bg.png'),
     auth_logo: require('./images/auth_logo.png'),
