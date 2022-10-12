@@ -16,15 +16,31 @@ export interface MarketHeaderSubListItemModel {
     baseMaxSize?: string
     tradingStatus: string
     listRoles: any
-  }
+}
 
 export interface MarketHeaderItemModel {
     list: MarketHeaderSubListItemModel[];
     title: string;
-  }
+}
+
+export interface MarketsListItemModel {
+    marketId: number
+    market: string
+    askPrice: number
+    bidPrice: number
+    lastPrice?: number
+    openPrice: number
+    prevPrice?: number
+    high?: number
+    low?: number
+    volume?: number
+    listRoles?: string
+    status?: string
+}
 
 interface InitialStates extends CommonFetchParamsModel {
     marketHeader: MarketHeaderItemModel[];
+    marketsList: MarketsListItemModel[];
 };
 
 export interface Actions extends CommonFetchParamsModel {
@@ -33,13 +49,14 @@ export interface Actions extends CommonFetchParamsModel {
 
 const initialState: InitialStates = {
     marketHeader: [] as MarketHeaderItemModel[],
+    marketsList: [] as MarketsListItemModel[],
     isRequesting: false,
     requestError: undefined
 };
 
 export const market = (
     state = initialState,
-    action: Actions = {type: '', response: undefined}
+    action: Actions = { type: '', response: undefined }
 ) => {
     switch (action.type) {
         case marketActionTypes.GET_MARKET_HEADER_REQUEST:
@@ -55,6 +72,24 @@ export const market = (
                 requestError: undefined,
             }
         case marketActionTypes.GET_MARKET_HEADER_ERROR:
+            return {
+                ...state,
+                isRequesting: false,
+                requestError: action.response as RequestErrorModel,
+            }
+        case marketActionTypes.GET_MARKETS_LIST_REQUEST:
+            return {
+                ...state,
+                isRequesting: true,
+            }
+        case marketActionTypes.GET_MARKETS_LIST_SUCCESS:
+            return {
+                ...state,
+                marketsList: action.response.data as MarketsListItemModel[],
+                isRequesting: false,
+                requestError: undefined,
+            }
+        case marketActionTypes.GET_MARKETS_LIST_ERROR:
             return {
                 ...state,
                 isRequesting: false,

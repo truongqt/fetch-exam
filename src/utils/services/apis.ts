@@ -40,7 +40,23 @@ function getMarketHeader<T>(): NetworkPromiseResponse<T> {
   })
 }
 
+function getMarketsList<T>(): NetworkPromiseResponse<T> {
+  return new Promise((resolve, reject) => {
+    apisauces.get(ENDPOINTS.GET_MARKETS_LIST)
+      .then((res) => {
+        if (res.ok) {
+          return resolve(res.data as any)
+        }
+        reject(res.data);
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
 export const apis = {
   login,
-  getMarketHeader
+  getMarketHeader,
+  getMarketsList
 }
