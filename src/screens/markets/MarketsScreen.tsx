@@ -1,8 +1,8 @@
-import {Text} from '@rneui/themed';
-import {images} from 'assets';
+import {Image as EImage, Text} from '@rneui/themed';
+import {colors, fonts, images} from 'assets';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, Image, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
@@ -23,13 +23,11 @@ const MarketsScreen = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const flatlistRef = useRef<FlatList>(null);
   const onPressSelectItem = useCallback((itemTitle: string) => {
-    setSelectedItem(() => {
-      const index = marketHeader.findIndex(item => item.title === itemTitle);
-      flatlistRef.current?.scrollToIndex({
-        index: index,
-      });
-      return itemTitle;
-    });
+    const index = marketHeader.findIndex(item => item.title === itemTitle);
+    if (index > -1) {
+      flatlistRef.current?.scrollToIndex({index});
+    }
+    setSelectedItem(itemTitle);
   }, []);
 
   useEffect(() => {
@@ -55,8 +53,12 @@ const MarketsScreen = () => {
       angle={225}>
       <View style={{paddingTop: scale(21 + insets.top / 2)}}>
         <View style={styles.topRow}>
-          <Text>{t('MARKETS')}</Text>
-          <Image source={images.search_icon} style={styles.searchIcon} />
+          <Text style={styles.headerTitle}>{t('MARKETS')}</Text>
+          <EImage
+            source={images.search_icon}
+            style={styles.searchIcon}
+            onPress={() => {}}
+          />
         </View>
         <FlatList
           ref={flatlistRef}
@@ -89,6 +91,14 @@ const MarketsScreen = () => {
 export default MarketsScreen;
 
 const styles = StyleSheet.create({
+  headerTitle: {
+    fontFamily: fonts.Roboto.regular,
+    fontWeight: '700',
+    fontSize: scale(16),
+    lineHeight: scale(16),
+    color: colors.c3D436C,
+    letterSpacing: scale(0.5),
+  },
   topRow: {
     marginLeft: scale(28),
     marginRight: scale(19),

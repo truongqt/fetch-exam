@@ -1,18 +1,12 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from '@react-navigation/stack';
-import { colors, fonts, images } from 'assets';
-import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Image, Platform, StyleSheet, Text, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
-import { isIos, scale } from 'utils/helpers/device';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {colors, fonts, images} from 'assets';
+import React from 'react';
+import {useTranslation} from 'react-i18next';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {isIos, scale} from 'utils/helpers/device';
 import HomeStack from './HomeStack';
-
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,13 +34,13 @@ const MainTabs = () => {
   );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <Tab.Navigator
         initialRouteName="MarketsTab"
         screenOptions={{
-            headerShown: false,
-            tabBarShowLabel: false,
-            tabBarStyle: {
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarStyle: {
             height: tabBarHeight,
             backgroundColor: 'white',
             shadowColor: 'black',
@@ -58,32 +52,19 @@ const MainTabs = () => {
             shadowOpacity: 0.22,
             shadowRadius: 2.22,
             paddingVertical: scale(insets.bottom / 3),
-            },
-            tabBarHideOnKeyboard: !isIos()
-        }}
-        >
+          },
+          tabBarHideOnKeyboard: !isIos(),
+        }}>
         <Tab.Screen
           name="HomeTab"
           component={HomeStack}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <>
                 {focused ? (
-                  <>
-                    {renderItem(
-                      images.home_icon,
-                      "Home",
-                      colors.c597AF4,
-                    )}
-                  </>
+                  <>{renderItem(images.home_icon, 'Home', colors.c597AF4)}</>
                 ) : (
-                  <>
-                    {renderItem(
-                      images.home_icon,
-                      'Home',
-                      colors.c9194BB,
-                    )}
-                  </>
+                  <>{renderItem(images.home_icon, 'Home', colors.c9194BB)}</>
                 )}
               </>
             ),
@@ -93,23 +74,15 @@ const MainTabs = () => {
           name="MarketsTab"
           component={HomeStack}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <>
                 {focused ? (
                   <>
-                    {renderItem(
-                      images.markets_icon,
-                      'Markets',
-                      colors.c597AF4,
-                    )}
+                    {renderItem(images.markets_icon, 'Markets', colors.c597AF4)}
                   </>
                 ) : (
                   <>
-                    {renderItem(
-                      images.markets_icon,
-                      'Markets',
-                      colors.c9194BB,
-                    )}
+                    {renderItem(images.markets_icon, 'Markets', colors.c9194BB)}
                   </>
                 )}
               </>
@@ -120,23 +93,15 @@ const MainTabs = () => {
           name="WalletsTab"
           component={HomeStack}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <>
                 {focused ? (
                   <>
-                    {renderItem(
-                      images.wallets_icon,
-                      'Wallets',
-                      colors.c597AF4,
-                    )}
+                    {renderItem(images.wallets_icon, 'Wallets', colors.c597AF4)}
                   </>
                 ) : (
                   <>
-                    {renderItem(
-                      images.wallets_icon,
-                      'Wallets',
-                      colors.c9194BB,
-                    )}
+                    {renderItem(images.wallets_icon, 'Wallets', colors.c9194BB)}
                   </>
                 )}
               </>
@@ -147,7 +112,7 @@ const MainTabs = () => {
           name="PortfolioTab"
           component={HomeStack}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <>
                 {focused ? (
                   <>
@@ -174,24 +139,12 @@ const MainTabs = () => {
           name="MoreTab"
           component={HomeStack}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <>
                 {focused ? (
-                  <>
-                    {renderItem(
-                      images.more_icon,
-                      'More',
-                      colors.c597AF4,
-                    )}
-                  </>
+                  <>{renderItem(images.more_icon, 'More', colors.c597AF4)}</>
                 ) : (
-                  <>
-                    {renderItem(
-                      images.more_icon,
-                      'More',
-                      colors.c9194BB,
-                    )}
-                  </>
+                  <>{renderItem(images.more_icon, 'More', colors.c9194BB)}</>
                 )}
               </>
             ),
@@ -203,15 +156,12 @@ const MainTabs = () => {
 };
 
 const MainNavigation = () => {
-  const navigation = useNavigation();
-
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         ...TransitionPresets.SlideFromRightIOS,
-        // animationEnabled: true
-        cardStyle: { backgroundColor: 'red' },
+        cardStyle: {backgroundColor: 'red'},
       }}>
       <Stack.Screen name="MainTabs" component={MainTabs} />
     </Stack.Navigator>
@@ -222,8 +172,7 @@ const styles = StyleSheet.create({
   icon: {
     width: scale(25),
     height: scale(25),
-    // padding: scale(10)
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   },
 });
 

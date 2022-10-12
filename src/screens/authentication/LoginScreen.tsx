@@ -5,55 +5,73 @@ import {colors, fonts, images} from 'assets';
 import {useShowLoading} from 'hooks/useShowLoading';
 import {MainNavigationName, StackParamList} from 'navigation/ScreenProps';
 import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {
   Image,
-  KeyboardAvoidingView,
-  Platform,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useDispatch, useSelector} from 'react-redux';
 import allActions from 'redux-manager/allActions';
 import {LoginParams} from 'redux-manager/auth/saga';
 import {RootState} from 'redux-manager/rootReducers';
-import {device, scale} from 'utils/helpers/device';
-import {useTranslation} from 'react-i18next';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {scale} from 'utils/helpers/device';
+import {validateEmail} from 'utils/helpers/functions';
 
 const LoginScreen = () => {
-  const distpatch = useDispatch();
+  const dispatch = useDispatch();
   const {isRequesting} = useSelector((state: RootState) => state.auth);
   useShowLoading(!!isRequesting);
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
-
-  const {t, i18n} = useTranslation();
-  const [currentLanguage, setLanguage] = useState('en');
+  const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
+  const [isRememberMe, setIsRememberMe] = useState(false);
+
   const loginDataTest: LoginParams = {
     email: 'tokenize.test@gmail.com',
     password: 'Test#111',
     captcha: 'yWOEjZMIhY',
     captchaBypass: 'yWOEjZMIhY',
   };
+
   const [loginInputData, setLoginInputData] =
     useState<LoginParams>(loginDataTest);
-  const [isRememberMe, setIsRememberMe] = useState(false);
 
-  const changeLanguage = (value: any) => {
-    console.log('value: ', value);
-    i18n
-      .changeLanguage(value)
-      .then(() => setLanguage(value))
-      .catch(err => console.log(err));
+  const validateLoginData = () => {
+    if (!validateEmail(loginInputData.email)) {
+      dispatch(
+        allActions.common.setErrorPopup({
+          show: true,
+          error: {
+            message: t('Please provide valid email address.'),
+          },
+        }),
+      );
+      return false;
+    }
+    if (!loginInputData.password) {
+      dispatch(
+        allActions.common.setErrorPopup({
+          show: true,
+          error: {
+            message: t('Please provide password.'),
+          },
+        }),
+      );
+      return false;
+    }
+    return true;
   };
 
   const login = async () => {
+    if (!validateLoginData()) return;
     const loginData: LoginParams = {
       ...loginInputData,
     };
-    distpatch(
+    dispatch(
       allActions.auth.loginRequest({
         payload: loginData,
         callBack: ({data, error}) => {
@@ -61,7 +79,7 @@ const LoginScreen = () => {
             navigation.navigate(MainNavigationName);
           }
           if (error) {
-            distpatch(
+            dispatch(
               allActions.common.setErrorPopup({
                 show: true,
                 error: error,
