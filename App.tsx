@@ -12,9 +12,19 @@ import AppOverlayLoading from 'components/AppOverlayLoading/AppOverlayLoading';
 import ErrorPopup from 'components/ErrorPopup/ErrorPopup';
 import AppNavigation from 'navigation/AppNavigation';
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {LogBox, StyleSheet} from 'react-native';
 import {Provider} from 'react-redux';
 import rootStore from 'redux-manager/rootStore';
+
+LogBox.ignoreLogs([
+  // 'Warning: ...',
+  // 'Warning: componentWillReceiveProp',
+  'Require cycle:',
+  'remote notifications',
+  'componentWillReceiveProps',
+  'Looks like '
+  // .....
+]);
 
 const App = () => {
   return (

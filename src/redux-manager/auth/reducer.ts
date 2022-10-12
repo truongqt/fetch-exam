@@ -37,13 +37,11 @@ export const auth = (
 ) => {
     switch (action.type) {
         case authActionTypes.LOGIN_REQUEST:
-            console.log('LOGIN_REQUEST....')
             return {
                 ...state,
                 isRequesting: true,
             }
         case authActionTypes.LOGIN_SUCCESS:
-            console.log('LOGIN_SUCCESS: ', JSON.stringify(action))
 
             return {
                 ...state,
@@ -52,7 +50,6 @@ export const auth = (
                 requestError: undefined,
             }
         case authActionTypes.LOGIN_ERROR:
-            console.log('LOGIN_ERROR....')
             return {
                 ...state,
                 isRequesting: false,

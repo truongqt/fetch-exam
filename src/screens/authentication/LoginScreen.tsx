@@ -4,6 +4,7 @@ import {Button, CheckBox, Text} from '@rneui/themed';
 import {colors, fonts, images} from 'assets';
 import {useShowLoading} from 'hooks/useShowLoading';
 import {
+  MainNavigationName,
   MarketSummariesScreenName,
   StackParamList,
 } from 'navigation/ScreenProps';
@@ -58,7 +59,7 @@ const LoginScreen = () => {
         payload: loginData,
         callBack: ({data, error}) => {
           if (data) {
-            navigation.navigate(MarketSummariesScreenName);
+            navigation.navigate(MainNavigationName);
           }
           if(error){
             distpatch(allActions.common.setErrorPopup({

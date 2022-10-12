@@ -15,10 +15,8 @@ export interface GetMarketHeaderRequestModel extends CommonFetchParamsModel {
 
 export function* getMarketHeaderRequest(data: GetMarketHeaderRequestModel) {
     const { callBack } = data;
-    console.log('loginRequest saga...');
     try {
         const response: GetMarketHeaderSuccessModel = yield apis.getMarketHeader();
-        console.log('saga getMarketHeaderRequest success: ', JSON.stringify(response))
         yield put(allActions.market.getMarketHeaderSuccess(response));
 
         callBack && callBack({
@@ -26,7 +24,6 @@ export function* getMarketHeaderRequest(data: GetMarketHeaderRequestModel) {
             error: undefined,
         });
     } catch (error) {
-        console.log('saga getMarketHeaderRequest error: ', JSON.stringify(error))
         callBack && callBack({
             data: undefined,
             error: error as RequestErrorModel,
@@ -36,10 +33,6 @@ export function* getMarketHeaderRequest(data: GetMarketHeaderRequestModel) {
 }
 
 export function* watchGetMarketHeaderRequest() {
-    // while (true) {
-        // @ts-ignore
-        const watcher = yield takeLatest(marketActionTypes.GET_MARKET_HEADER_REQUEST, getMarketHeaderRequest);
-        // yield take('LOGOUT');
-        // yield cancel(watcher);
-    // }
+    // @ts-ignore
+    yield takeLatest(marketActionTypes.GET_MARKET_HEADER_REQUEST, getMarketHeaderRequest);
 }

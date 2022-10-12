@@ -60,14 +60,11 @@ export const market = (
 ) => {
     switch (action.type) {
         case marketActionTypes.GET_MARKET_HEADER_REQUEST:
-            console.log('GET_MARKET_HEADER_REQUEST....')
             return {
                 ...state,
                 isRequesting: true,
             }
         case marketActionTypes.GET_MARKET_HEADER_SUCCESS:
-            console.log('GET_MARKET_HEADER_SUCCESS: ', JSON.stringify(action))
-
             return {
                 ...state,
                 marketHeader: action.response.data as MarketHeaderModel,
@@ -75,7 +72,6 @@ export const market = (
                 requestError: undefined,
             }
         case marketActionTypes.GET_MARKET_HEADER_ERROR:
-            console.log('GET_MARKET_HEADER_ERROR....')
             return {
                 ...state,
                 isRequesting: false,

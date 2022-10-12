@@ -3,6 +3,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {DEFAULT_HEADERS} from 'apisauce';
 import {
   LoginScreenName,
+  MainNavigationName,
   MarketSummariesScreenName,
   StackParamList,
 } from 'navigation/ScreenProps';
@@ -29,7 +30,7 @@ const StartingScreen = () => {
         apisauces.setHeader('Authorization', 'Bearer ' + userProfile?.token);
         navigation.dispatch(
           CommonActions.reset({
-            routes: [{name: MarketSummariesScreenName}],
+            routes: [{name: MainNavigationName}],
           }),
         );
       } else {

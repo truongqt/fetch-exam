@@ -7,9 +7,11 @@ import MarketSummariesScreen from 'screens/market-summaries/MarketSummariesScree
 import StartingScreen from 'screens/starting/StartingScreen';
 import {
   LoginScreenName,
+  MainNavigationName,
   MarketSummariesScreenName,
   StartingScreenName,
 } from './ScreenProps';
+import MainNavigation from './stack/MainNavigation';
 
 const Stack = createStackNavigator();
 
@@ -24,10 +26,11 @@ const AppNavigation = () => {
           }}>
           <Stack.Screen name={StartingScreenName} component={StartingScreen} />
           <Stack.Screen name={LoginScreenName} component={LoginScreen} />
-          <Stack.Screen
+          {/* <Stack.Screen
             name={MarketSummariesScreenName}
             component={MarketSummariesScreen}
-          />
+          /> */}
+          <Stack.Screen name={MainNavigationName} component={MainNavigation}/>
         </Stack.Navigator>
       </NavigationContainer>
     </>
