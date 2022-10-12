@@ -53,12 +53,12 @@ const styles = StyleSheet.create({
   errorTxt: {
     fontFamily: fonts.Roboto.regular,
     fontWeight: '400',
-    fontSize: scale(14),
-    lineHeight: scale(21),
+    fontSize: scale(15),
+    lineHeight: scale(18),
     textAlign: 'center',
     letterSpacing: scale(0.5),
-    paddingHorizontal: scale(8),
-    color: colors.c5073F2
+    paddingHorizontal: scale(12),
+    color: colors.c3BBA7D
   },
   btn: {
     marginTop: scale(24),

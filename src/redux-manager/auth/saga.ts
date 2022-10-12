@@ -1,9 +1,8 @@
-import { authActionTypes, LoginSuccessModel } from "./action";
-import { cancel, put, take, takeLatest } from 'redux-saga/effects';
-import { CommonFetchParamsModel, RequestErrorModel } from "redux-manager/commonType";
-import { apis, apisauces } from "utils/services/apis";
 import allActions from "redux-manager/allActions";
-import { ProfileModel } from "./reducer";
+import { CommonFetchParamsModel, RequestErrorModel } from "redux-manager/commonType";
+import { put, takeLatest } from 'redux-saga/effects';
+import { apis, apisauces } from "utils/services/apis";
+import { authActionTypes, LoginSuccessModel } from "./action";
 
 export interface LoginParams {
     email: string;
