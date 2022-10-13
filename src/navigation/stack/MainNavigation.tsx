@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {isIos, scale} from 'utils/helpers/device';
-import HomeStack from './HomeStack';
+import MarketsStack from './MarketsStack';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -57,7 +57,7 @@ const MainTabs = () => {
         }}>
         <Tab.Screen
           name="HomeTab"
-          component={()=><></>}
+          component={() => <></>}
           options={{
             tabBarIcon: ({focused}) => (
               <>
@@ -72,7 +72,7 @@ const MainTabs = () => {
         />
         <Tab.Screen
           name="MarketsTab"
-          component={HomeStack}
+          component={MarketsStack}
           options={{
             tabBarIcon: ({focused}) => (
               <>
@@ -91,7 +91,7 @@ const MainTabs = () => {
         />
         <Tab.Screen
           name="WalletsTab"
-          component={()=><></>}
+          component={() => <></>}
           options={{
             tabBarIcon: ({focused}) => (
               <>
@@ -110,7 +110,7 @@ const MainTabs = () => {
         />
         <Tab.Screen
           name="PortfolioTab"
-          component={()=><></>}
+          component={() => <></>}
           options={{
             tabBarIcon: ({focused}) => (
               <>
@@ -137,7 +137,7 @@ const MainTabs = () => {
         />
         <Tab.Screen
           name="MoreTab"
-          component={()=><></>}
+          component={() => <></>}
           options={{
             tabBarIcon: ({focused}) => (
               <>

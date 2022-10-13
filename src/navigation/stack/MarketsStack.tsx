@@ -5,7 +5,7 @@ import MarketsScreen from 'screens/markets/MarketsScreen';
 
 const Stack = createStackNavigator();
 
-const HomeStack = () => {
+const MarketsStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -16,4 +16,4 @@ const HomeStack = () => {
   );
 };
 
-export default HomeStack;
+export default MarketsStack;
